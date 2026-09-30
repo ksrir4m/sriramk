@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sriram K | Data Product Manager</title>
+<meta name="description" content="Sriram K is a data product and technical product professional focused on enterprise data platforms, financial products, and AI-ready data." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EAF1F8;
+    --bg-deep:#DDE9F5;
+    --navy:#0B2A4A;
+    --navy-2:#123A63;
+    --slate:#51647C;
+    --slate-light:#8496AC;
+    --gold:#B8903E;
+    --gold-light:#F3E7CE;
+    --card:#FFFFFF;
+    --line:#CBDBEA;
+    --serif:'Source Serif 4', Georgia, serif;
+    --sans:'Inter', -apple-system, sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+    --maxw:1240px;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:.01ms !important; transition-duration:.01ms !important; }
+  }
+  body{
+    background:var(--bg); color:var(--navy); font-family:var(--sans);
+    line-height:1.65; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  a{ color:inherit; text-decoration:none; }
+  ul{ list-style:none; }
+  img{ max-width:100%; display:block; }
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 56px; }
+  :focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+
+  /* ---- roadmap progress bar ---- */
+  .roadmap{ position:fixed; top:0; left:0; right:0; height:3px; z-index:200; background:var(--line); }
+  .roadmap-fill{ height:100%; width:0%; background:var(--gold); transition:width .1s linear; }
+  .roadmap-ticks{ position:fixed; top:3px; left:0; right:0; z-index:199; height:0; }
+  .tick{
+    position:absolute; top:0; transform:translateX(-50%);
+    font-family:var(--mono); font-size:0.64rem; letter-spacing:0.04em; color:var(--slate-light);
+    padding-top:8px; white-space:nowrap; opacity:0; transition:opacity .3s ease, color .3s ease;
+  }
+  .tick.passed{ color:var(--gold); opacity:1; }
+  .tick.active{ opacity:1; }
+
+  /* ---- header ---- */
+  header.top{ position:fixed; top:0; left:0; right:0; z-index:150; padding:24px 0 0; }
+  .top-inner{ max-width:var(--maxw); margin:0 auto; padding:14px 56px 0; display:flex; justify-content:space-between; align-items:center; }
+  .logo{ font-family:var(--serif); font-weight:600; font-size:1.15rem; letter-spacing:0.01em; color:var(--navy); }
+  .logo .dot{ color:var(--gold); }
+  .menu-toggle{
+    display:flex; align-items:center; gap:12px; background:none; border:none; cursor:pointer;
+    font-family:var(--mono); font-size:0.74rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--navy);
+    padding:8px 0;
+  }
+  .menu-toggle .bars{ display:flex; flex-direction:column; gap:4px; width:22px; }
+  .menu-toggle .bars span{ height:2px; background:var(--navy); transition:transform .3s ease, opacity .3s ease; }
+  .menu-toggle.open .bars span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
+  .menu-toggle.open .bars span:nth-child(2){ opacity:0; }
+  .menu-toggle.open .bars span:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
+
+  /* ---- full-screen nav overlay ---- */
+  .overlay{
+    position:fixed; inset:0; z-index:140; background:var(--navy);
+    display:flex; flex-direction:column; align-items:flex-start; justify-content:center;
+    padding:0 clamp(40px,8vw,140px);
+    clip-path:circle(2% at calc(100% - 70px) 44px);
+    transition:clip-path .6s cubic-bezier(.65,0,.35,1);
+    pointer-events:none;
+  }
+  .overlay.open{ clip-path:circle(150% at calc(100% - 70px) 44px); pointer-events:auto; }
+  .overlay a{
+    font-family:var(--serif); font-size:clamp(2.2rem,6.5vw,4.2rem); font-weight:600; color:#F3F6FA;
+    display:block; margin:8px 0; opacity:0; transform:translateY(26px);
+    transition:opacity .5s ease, transform .5s ease, color .3s ease;
+  }
+  .overlay.open a{ opacity:1; transform:none; }
+  .overlay.open a:nth-child(1){ transition-delay:.08s; }
+  .overlay.open a:nth-child(2){ transition-delay:.14s; }
+  .overlay.open a:nth-child(3){ transition-delay:.20s; }
+  .overlay.open a:nth-child(4){ transition-delay:.26s; }
+  .overlay.open a:nth-child(5){ transition-delay:.32s; }
+  .overlay.open a:nth-child(6){ transition-delay:.38s; }
+  .overlay a:hover{ color:var(--gold); }
+  .overlay a .num{ font-family:var(--mono); font-size:1rem; color:#5B7595; margin-right:20px; vertical-align:middle; }
+
+  /* ---- hero ---- */
+  section.hero{ padding:200px 0 120px; position:relative; }
+  section.hero::before{
+    content:''; position:absolute; top:0; right:0; width:52%; height:100%;
+    background:radial-gradient(circle at 80% 20%, rgba(184,144,62,0.14), transparent 60%),
+               radial-gradient(circle at 60% 70%, rgba(11,42,74,0.08), transparent 55%);
+    pointer-events:none;
+  }
+  .hero-grid{ display:grid; grid-template-columns:1.3fr 0.9fr; gap:64px; align-items:center; position:relative; z-index:1; }
+  .eyebrow{ font-family:var(--mono); font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); display:flex; align-items:center; gap:10px; }
+  .eyebrow::before{ content:''; width:30px; height:1px; background:var(--gold); }
+  .hero h1{
+    font-family:var(--serif); font-weight:700; color:var(--navy); font-size:clamp(2.6rem,4.6vw,4rem);
+    line-height:1.08; margin-top:20px; letter-spacing:-0.01em;
+  }
+  .hero .role{ font-family:var(--serif); font-style:italic; font-weight:400; color:var(--slate); font-size:clamp(1.1rem,1.6vw,1.3rem); margin-top:16px; }
+  .hero-pitch{ max-width:600px; margin-top:26px; font-size:1.05rem; color:var(--slate); }
+  .hero-pitch b{ color:var(--navy); font-weight:600; }
+  .hero-actions{ display:flex; gap:16px; margin-top:38px; flex-wrap:wrap; }
+  .btn{
+    font-family:var(--sans); font-size:0.88rem; font-weight:600; letter-spacing:0.02em; padding:15px 30px;
+    border-radius:3px; transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+    cursor:pointer; display:inline-flex; align-items:center; gap:8px; border:1px solid transparent;
+  }
+  .btn-solid{ background:var(--navy); color:#F3F6FA; }
+  .btn-solid:hover{ background:var(--gold); transform:translateY(-2px); box-shadow:0 14px 28px rgba(184,144,62,0.28); }
+  .btn-line{ border-color:var(--navy); color:var(--navy); }
+  .btn-line:hover{ background:var(--navy); color:#F3F6FA; transform:translateY(-2px); }
+
+  .hero-photo-wrap{ position:relative; }
+  .hero-photo{
+    width:100%; max-width:340px; aspect-ratio:1; border-radius:8px; overflow:hidden; margin-left:auto;
+    box-shadow:0 30px 60px rgba(11,42,74,0.18); filter:grayscale(0.55); transition:filter .5s ease;
+    border:6px solid var(--card);
+  }
+  .hero-photo:hover{ filter:grayscale(0); }
+  .hero-photo img{ width:100%; height:100%; object-fit:cover; }
+  .photo-tag{
+    position:absolute; bottom:-18px; left:-18px; background:var(--card); border:1px solid var(--line);
+    padding:14px 20px; border-radius:4px; box-shadow:0 12px 30px rgba(11,42,74,0.1);
+  }
+  .photo-tag .n{ font-family:var(--mono); font-weight:600; color:var(--gold); font-size:1.2rem; }
+  .photo-tag .l{ font-family:var(--mono); font-size:0.66rem; letter-spacing:0.05em; text-transform:uppercase; color:var(--slate-light); margin-top:2px; }
+
+  .hero-stats{ margin-top:88px; display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line); border-bottom:1px solid var(--line); position:relative; z-index:1; }
+  .hstat{ padding:26px 30px; border-left:1px solid var(--line); }
+  .hstat:first-child{ border-left:none; padding-left:0; }
+  .hstat .n{ font-family:var(--serif); font-weight:700; font-size:1.9rem; color:var(--navy); }
+  .hstat .l{ font-family:var(--mono); font-size:0.72rem; letter-spacing:0.04em; text-transform:uppercase; color:var(--slate-light); margin-top:6px; }
+
+  /* ---- section shell ---- */
+  section.block{ padding:140px 0; }
+  section.block:nth-of-type(even){ background:var(--bg-deep); }
+  .sec-head{ display:flex; gap:32px; align-items:flex-start; margin-bottom:64px; }
+  .sec-num{ font-family:var(--serif); font-weight:700; font-size:4.6rem; color:var(--line); line-height:1; user-select:none; }
+  .sec-title .eyebrow{ margin-bottom:0; }
+  .sec-title h2{ font-family:var(--serif); font-weight:600; color:var(--navy); font-size:clamp(1.7rem,2.6vw,2.3rem); margin-top:10px; }
+
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+
+  /* ---- education ---- */
+  .edu-grid{ display:grid; grid-template-columns:1.3fr 1fr; gap:70px; }
+  .edu-item{ background:var(--card); border:1px solid var(--line); border-radius:6px; padding:28px 32px; margin-bottom:22px; }
+  .edu-item:last-child{ margin-bottom:0; }
+  .edu-item .row{ display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+  .edu-item h3{ font-family:var(--serif); font-weight:600; font-size:1.2rem; color:var(--navy); }
+  .edu-item .years{ font-family:var(--mono); font-size:0.78rem; color:var(--gold); white-space:nowrap; }
+  .edu-item .degree{ color:var(--slate); font-size:0.92rem; margin-top:6px; font-style:italic; font-family:var(--serif); }
+  .edu-item .coursework{ font-size:0.88rem; color:var(--slate); margin-top:14px; }
+
+  .skill-group{ margin-bottom:30px; }
+  .skill-group:last-child{ margin-bottom:0; }
+  .skill-group h4{ font-family:var(--mono); font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--slate-light); margin-bottom:14px; }
+  .pill-row{ display:flex; flex-wrap:wrap; gap:9px; }
+  .pill{
+    font-size:0.82rem; padding:8px 15px; border:1px solid var(--line); border-radius:20px; color:var(--navy);
+    background:var(--card); transition:border-color .2s ease, transform .2s ease;
+  }
+  .pill:hover{ border-color:var(--gold); transform:translateY(-2px); }
+
+  /* ---- experience ---- */
+  .exp-timeline{ position:relative; padding-left:72px; }
+  .exp-line{ position:absolute; left:20px; top:4px; bottom:4px; width:1px; background:var(--line); overflow:hidden; }
+  .exp-line-fill{ position:absolute; left:0; top:0; width:100%; height:0%; background:var(--gold); transition:height .1s linear; }
+  .exp-entry{ position:relative; padding-bottom:58px; }
+  .exp-entry:last-child{ padding-bottom:0; }
+  .exp-node{
+    position:absolute; left:-72px; top:0; width:40px; height:40px; border-radius:8px;
+    background:var(--card); border:1px solid var(--line); display:flex; align-items:center; justify-content:center;
+    overflow:hidden; transform:scale(0.3); opacity:0;
+    transition:transform .5s cubic-bezier(.34,1.56,.64,1), opacity .4s ease, border-color .3s ease;
+  }
+  .exp-entry.in .exp-node{ transform:scale(1); opacity:1; }
+  .exp-node img{ width:100%; height:100%; object-fit:contain; padding: 1px; }
+  .exp-node .initial{ font-family:var(--mono); font-size:0.78rem; font-weight:600; color:var(--navy); }
+  .exp-top-line{ display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap; }
+  .exp-company{ font-family:var(--serif); font-weight:700; font-size:1.42rem; color:var(--navy); position:relative; display:inline-block; letter-spacing:-0.005em; }
+  .exp-company::after{ content:''; position:absolute; left:0; bottom:-2px; width:0; height:2px; background:var(--gold); transition:width .35s ease; }
+  .exp-entry:hover .exp-company::after{ width:100%; }
+  .exp-dates{ font-family:var(--mono); font-size:0.76rem; color:var(--gold); white-space:nowrap; }
+  .exp-role{ font-family:var(--sans); font-style:italic; font-weight:500; font-size:0.94rem; color:var(--slate); margin-top:5px; margin-bottom:18px; }
+  .exp-bullets li{
+    font-size:0.96rem; color:var(--navy); margin-bottom:13px; padding-left:20px; position:relative;
+    opacity:0; transform:translateX(-10px); transition:opacity .5s ease, transform .5s ease;
+  }
+  .exp-bullets li::before{ content:'—'; position:absolute; left:0; color:var(--slate-light); }
+  .exp-entry.in .exp-bullets li{ opacity:1; transform:none; }
+  .exp-bullets strong{ color:var(--gold); font-weight:600; }
+
+  /* ---- industry projects ---- */
+  .ind-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:28px; }
+  .ind-card{ background:var(--card); border:1px solid var(--line); border-radius:6px; padding:34px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+  .ind-card:hover{ transform:translateY(-5px); box-shadow:0 20px 40px rgba(11,42,74,0.12); border-color:var(--gold); }
+  .ind-card .tag{ font-family:var(--mono); font-size:0.7rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--gold); }
+  .ind-card h3{ font-family:var(--serif); font-weight:600; font-size:1.25rem; margin-top:10px; color:var(--navy); }
+  .ind-card ul{ margin-top:16px; }
+  .ind-card ul li{ font-size:0.9rem; color:var(--slate); margin-bottom:10px; padding-left:16px; position:relative; }
+  .ind-card ul li::before{ content:'·'; position:absolute; left:0; color:var(--gold); font-weight:700; font-size:1.1rem; line-height:1; }
+  .ind-card .stat{ font-family:var(--mono); font-size:0.78rem; color:var(--navy); margin-top:20px; border-top:1px solid var(--line); padding-top:14px; }
+  .ind-card .stat b{ color:var(--gold); }
+
+  /* ---- personal projects (accordion) ---- */
+  .pp-list{ border-top:1px solid var(--line); }
+  .pp-item{ border-bottom:1px solid var(--line); background:var(--card); }
+  .pp-head{ display:flex; justify-content:space-between; align-items:center; padding:30px 32px; cursor:pointer; gap:20px; }
+  .pp-head .left{ display:flex; align-items:baseline; gap:22px; }
+  .pp-head .idx{ font-family:var(--mono); font-size:0.8rem; color:var(--gold); }
+  .pp-head h3{ font-family:var(--serif); font-weight:600; font-size:1.2rem; color:var(--navy); }
+  .pp-head .tag{ font-family:var(--mono); font-size:0.72rem; color:var(--slate-light); margin-top:4px; }
+  .pp-plus{
+    width:30px; height:30px; border-radius:50%; border:1px solid var(--line); flex-shrink:0;
+    display:flex; align-items:center; justify-content:center; position:relative; transition:border-color .3s ease, transform .4s ease;
+  }
+  .pp-plus::before, .pp-plus::after{ content:''; position:absolute; background:var(--navy); transition:transform .3s ease, background .3s ease; }
+  .pp-plus::before{ width:11px; height:1.6px; }
+  .pp-plus::after{ width:1.6px; height:11px; }
+  .pp-item.open .pp-plus{ transform:rotate(135deg); border-color:var(--gold); }
+  .pp-item.open .pp-plus::before, .pp-item.open .pp-plus::after{ background:var(--gold); }
+  .pp-body{ max-height:0; overflow:hidden; transition:max-height .45s cubic-bezier(.65,0,.35,1); }
+  .pp-item.open .pp-body{ max-height:260px; }
+  .pp-body-inner{ padding:0 32px 34px; display:grid; grid-template-columns:1fr 240px; gap:36px; }
+  .pp-body-inner p{ font-size:0.94rem; color:var(--slate); }
+  .pp-tags{ display:flex; flex-wrap:wrap; gap:8px; align-content:flex-start; }
+  .pp-tags span{ font-family:var(--mono); font-size:0.7rem; padding:6px 12px; border:1px solid var(--line); border-radius:100px; color:var(--navy); }
+  .pp-link{ margin-top:16px; font-family:var(--mono); font-size:0.78rem; color:var(--gold); display:inline-block; font-weight:600; }
+  .pp-soon{ color:var(--slate-light); font-family:var(--mono); font-size:0.78rem; }
+
+  .more-soon{ padding:30px 32px; font-family:var(--mono); font-size:0.82rem; color:var(--slate-light); display:flex; align-items:center; gap:14px; background:var(--card); border-bottom:1px solid var(--line); }
+  .more-soon .dash{ width:22px; height:1px; background:var(--line); }
+
+  .ach-row{ margin-top:80px; display:grid; grid-template-columns:repeat(4,1fr); gap:28px; border-top:1px solid var(--line); padding-top:36px; }
+  .ach .l{ font-size:0.9rem; font-weight:600; color:var(--navy); }
+  .ach .s{ font-family:var(--mono); font-size:0.74rem; color:var(--slate-light); margin-top:8px; }
+
+  /* ---- contact ---- */
+  section.contact{ background:var(--navy); color:#F3F6FA; padding:160px 0 120px; text-align:center; position:relative; overflow:hidden; }
+  section.contact::before{
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(circle at 30% 30%, rgba(184,144,62,0.16), transparent 55%),
+               radial-gradient(circle at 75% 70%, rgba(255,255,255,0.06), transparent 50%);
+  }
+  .contact-inner{ position:relative; z-index:1; max-width:700px; margin:0 auto; }
+  .contact .eyebrow{ color:var(--gold); justify-content:center; }
+  .contact h2{ font-family:var(--serif); font-weight:600; font-size:clamp(2.1rem,4.5vw,3.2rem); margin-top:22px; }
+  .contact .big-link{
+    display:inline-block; margin-top:38px; font-family:var(--serif); font-size:clamp(1.2rem,2.4vw,1.6rem);
+    border-bottom:2px solid rgba(255,255,255,0.25); padding-bottom:8px; transition:border-color .3s ease, color .3s ease;
+  }
+  .contact .big-link:hover{ border-color:var(--gold); color:var(--gold); }
+  .contact-meta{ margin-top:44px; display:flex; gap:32px; justify-content:center; flex-wrap:wrap; font-family:var(--mono); font-size:0.84rem; color:#AEC0D6; }
+  .contact-meta a:hover{ color:#F3F6FA; }
+
+  footer{ text-align:center; padding:36px 0; font-family:var(--mono); font-size:0.74rem; color:var(--slate-light); background:var(--bg); }
+
+  @media (max-width:1024px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-photo{ margin:0 auto; max-width:260px; }
+    .hero::before{ width:100%; }
+    .edu-grid{ grid-template-columns:1fr; }
+    .exp-timeline{ padding-left:56px; }
+    .exp-node{ left:-56px; width:50px; height:50px; border-radius:7px; }
+    .exp-line{ left:16px; }
+    .ind-grid{ grid-template-columns:1fr; }
+    .pp-body-inner{ grid-template-columns:1fr; }
+    .hero-stats{ grid-template-columns:repeat(2,1fr); }
+    .ach-row{ grid-template-columns:repeat(2,1fr); }
+    .sec-num{ font-size:3rem; }
+    .tick{ display:none; }
+  }
+  @media (max-width:640px){
+    .wrap{ padding:0 24px; }
+    .top-inner{ padding:0 24px; }
+    section.hero{ padding-top:150px; }
+    section.block{ padding:88px 0; }
+    .edu-item, .ind-card{ padding:22px; }
+    .pp-head, .more-soon{ padding:24px; }
+    .pp-body-inner{ padding:0 24px 26px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="roadmap"><div class="roadmap-fill" id="roadmapFill"></div></div>
+<div class="roadmap-ticks" id="roadmapTicks"></div>
+
+<header class="top">
+  <div class="top-inner">
+    <a class="logo" href="#home">Sriram K<span class="dot">.</span></a>
+    <button class="menu-toggle" id="menuBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="overlay">
+      <span id="menuLabel">Menu</span>
+      <span class="bars"><span></span><span></span><span></span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="overlay" id="overlay" aria-label="Main navigation">
+  <a href="#experience"><span class="num">01</span>Experience</a>
+  <a href="#impact"><span class="num">02</span>Selected Impact</a>
+  <a href="#expertise"><span class="num">03</span>Expertise</a>
+  <a href="#education"><span class="num">04</span>Education</a>
+  <a href="#contact"><span class="num">05</span>Contact</a>
+</nav>
+
+<section class="hero" id="home">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Data Product Manager · Enterprise Data · AI</div>
+        <h1>Sriram K</h1>
+        <div class="role">Product thinking for complex data systems</div>
+        <p class="hero-pitch">I turn complex business and data problems into products teams can trust. Over 5+ years across financial services, consulting, and enterprise technology, I have managed <b>10+ financial data products</b>, modernized enterprise platforms, and delivered measurable improvements in workflow speed, pricing, and operations.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-solid">Get in touch</a>
+          <a href="assets/Sriram_Resume.pdf" class="btn btn-line" download>Download résumé</a>
+          <a href="https://www.linkedin.com/in/sriram-kalyanasundaram/" class="btn btn-line" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+      <div class="hero-photo-wrap">
+        <div class="hero-photo"><img src="assets/Sriram%20K%20Formal%20Polo.jpeg" alt="Portrait of Sriram K"></div>
+        <div class="photo-tag"><div class="n">Data products</div><div class="l">Platforms · Analytics · AI</div></div>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="n">5+</div><div class="l">Years in product &amp; technology</div></div>
+      <div class="hstat"><div class="n">10+</div><div class="l">Financial data products managed</div></div>
+      <div class="hstat"><div class="n">500+</div><div class="l">Projects informing pricing &amp; risk</div></div>
+      <div class="hstat"><div class="n">100+</div><div class="l">Hours saved monthly through automation</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="experience">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">01</div>
+      <div class="sec-title"><div class="eyebrow">Professional Experience</div><h2>From banking systems to AI-ready data</h2></div>
+    </div>
+    <div class="exp-timeline">
+      <div class="exp-line"><div class="exp-line-fill" id="expLineFill"></div></div>
+      <div class="exp-entry reveal">
+        <div class="exp-node"><span class="initial">DF</span></div>
+        <div class="exp-top-line"><div class="exp-company">The Digital Fifth</div><div class="exp-dates">Jan 2026 – Present</div></div>
+        <div class="exp-role">Associate Consultant · Mumbai</div>
+        <ul class="exp-bullets">
+          <li>Lead modernization across a Cloudera Hadoop Data Lakehouse, delivering <strong>10+ architectural upgrades</strong> for standardization, availability, and AI/ML readiness.</li>
+          <li>Design AI/ML context frameworks and Knowledge Graphs that connect enterprise data to business concepts and GenAI use cases.</li>
+          <li>Define source-to-target mappings, data contracts, and validation rules while refining SCD2 marts and dimensional models.</li>
+          <li>Partner with data engineering teams on ingestion quality, ETL performance, SQL, and analytical reliability.</li>
+        </ul>
+      </div>
+      <div class="exp-entry reveal">
+        <div class="exp-node"><span class="initial">A</span></div>
+        <div class="exp-top-line"><div class="exp-company">Accordion</div><div class="exp-dates">Apr 2024 – Apr 2025</div></div>
+        <div class="exp-role">Business Manager · Hyderabad</div>
+        <ul class="exp-bullets">
+          <li>Managed the lifecycle of <strong>10+ financial data products</strong>, translating business requirements into specifications, analytics, workflows, and delivery plans.</li>
+          <li>Automated proposal and pricing workflows, reducing turnaround time by <strong>70%</strong>.</li>
+          <li>Analyzed pricing and risk across a <strong>500+ project portfolio</strong>; pricing normalization identified a reported <strong>$15M ARR opportunity</strong>.</li>
+          <li>Connected customer and financial data across 8 BI platforms to support collection initiatives, contributing to <strong>12% fewer payment delays</strong>.</li>
+        </ul>
+      </div>
+      <div class="exp-entry reveal">
+        <div class="exp-node"><span class="initial">C</span></div>
+        <div class="exp-top-line"><div class="exp-company">Citicorp Services India</div><div class="exp-dates">Jul 2019 – Jun 2022</div></div>
+        <div class="exp-role">Application Programmer · Chennai</div>
+        <ul class="exp-bullets">
+          <li>Improved hedge-fund application access latency by <strong>20%</strong> and reduced data-loading time by <strong>50%</strong> through application, database, and pipeline improvements.</li>
+          <li>Optimized SQL and indexing to improve query execution throughput by <strong>70%</strong>; redesigned two reporting dashboards.</li>
+          <li>Automated data-ingestion workflows, removing <strong>100+ hours of monthly manual effort</strong> and earning the Citi Copper Award for operational excellence.</li>
+          <li>Worked across Product, QA, and Engineering through Agile delivery, requirements, testing, and release management.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="impact">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">02</div>
+      <div class="sec-title"><div class="eyebrow">Selected Impact</div><h2>Outcomes that connect data to decisions</h2></div>
+    </div>
+    <div class="ind-grid">
+      <article class="ind-card reveal">
+        <div class="tag">Workflow automation</div>
+        <h3>Less time from proposal to decision</h3>
+        <ul><li>Structured enterprise data processing and automated proposal and pricing workflows.</li><li>Reduced turnaround time by 70% at Accordion.</li></ul>
+        <div class="stat"><b>70% faster workflow turnaround</b></div>
+      </article>
+      <article class="ind-card reveal">
+        <div class="tag">Pricing analytics</div>
+        <h3>Better visibility across a large portfolio</h3>
+        <ul><li>Analyzed pricing and risk signals across more than 500 projects.</li><li>Pricing normalization surfaced a reported ARR opportunity for commercial review.</li></ul>
+        <div class="stat"><b>$15M reported ARR opportunity identified</b></div>
+      </article>
+      <article class="ind-card reveal">
+        <div class="tag">Financial operations</div>
+        <h3>Data aligned around collection priorities</h3>
+        <ul><li>Synchronized customer and financial data across eight BI platforms.</li><li>Helped focus collection initiatives and contributed to fewer payment delays.</li></ul>
+        <div class="stat"><b>12% reduction in payment delays</b></div>
+      </article>
+      <article class="ind-card reveal">
+        <div class="tag">Operational excellence</div>
+        <h3>Time returned to the team</h3>
+        <ul><li>Automated data-ingestion and operational workflows at Citi.</li><li>Recognized with the Citi Copper Award for the improvement.</li></ul>
+        <div class="stat"><b>100+ hours saved each month</b></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="expertise">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">03</div>
+      <div class="sec-title"><div class="eyebrow">Expertise</div><h2>Product judgment, grounded in data</h2></div>
+    </div>
+    <div class="edu-grid">
+      <div class="reveal">
+        <div class="skill-group"><h4>Product management</h4><div class="pill-row"><span class="pill">Data product management</span><span class="pill">Product lifecycle</span><span class="pill">Product requirements</span><span class="pill">PRD / BRD</span><span class="pill">Prioritization</span><span class="pill">KPI tracking</span><span class="pill">Stakeholder management</span></div></div>
+        <div class="skill-group"><h4>Data &amp; analytics</h4><div class="pill-row"><span class="pill">SQL</span><span class="pill">Python</span><span class="pill">Power BI</span><span class="pill">Tableau</span><span class="pill">Pricing analytics</span><span class="pill">Financial modeling</span><span class="pill">DAX</span></div></div>
+      </div>
+      <div class="reveal">
+        <div class="skill-group"><h4>Platforms &amp; engineering</h4><div class="pill-row"><span class="pill">Data Lakehouse</span><span class="pill">Data warehousing</span><span class="pill">ETL</span><span class="pill">Data modeling</span><span class="pill">SCD2</span><span class="pill">Data quality</span><span class="pill">PySpark</span><span class="pill">Databricks</span></div></div>
+        <div class="skill-group"><h4>AI &amp; delivery</h4><div class="pill-row"><span class="pill">GenAI</span><span class="pill">LLMs</span><span class="pill">RAG</span><span class="pill">Knowledge Graphs</span><span class="pill">AI-ready data</span><span class="pill">Agile</span><span class="pill">Scrum</span><span class="pill">Jira</span><span class="pill">Confluence</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="education">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-num">04</div>
+      <div class="sec-title"><div class="eyebrow">Education</div><h2>Business and engineering foundations</h2></div>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-item reveal">
+        <div class="row"><h3>Indian Institute of Management Tiruchirappalli</h3><div class="years">Jul 2022 – Jun 2024</div></div>
+        <div class="degree">Master's Degree in General Management · Trichy, India</div>
+      </div>
+      <div class="edu-item reveal">
+        <div class="row"><h3>National Institute of Technology Tiruchirappalli</h3><div class="years">Jul 2015 – Jun 2019</div></div>
+        <div class="degree">B.Tech. in Electrical and Electronics Engineering · Trichy, India</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-inner">
+    <div class="eyebrow reveal">05 · Contact</div>
+    <h2 class="reveal">Building products for data-heavy problems?</h2>
+    <a href="mailto:srinivaas98.work@gmail.com" class="big-link reveal">srinivaas98.work@gmail.com</a>
+    <div class="contact-meta reveal">
+      <a href="tel:+919445815730">+91 94458 15730</a>
+      <a href="https://www.linkedin.com/in/sriram-kalyanasundaram/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="https://github.com/Ksrqooi/sriramk" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="assets/Sriram_Resume.pdf" download>Résumé ↓</a>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Sriram K · Data Product Management</footer>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const menuLabel = document.getElementById('menuLabel');
+  const overlay = document.getElementById('overlay');
+  function closeOverlay(){
+    overlay.classList.remove('open');
+    menuBtn.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuLabel.textContent = 'Menu';
+  }
+  menuBtn.addEventListener('click', () => {
+    const opening = !overlay.classList.contains('open');
+    overlay.classList.toggle('open', opening);
+    menuBtn.classList.toggle('open', opening);
+    menuBtn.setAttribute('aria-expanded', String(opening));
+    menuLabel.textContent = opening ? 'Close' : 'Menu';
+  });
+  overlay.querySelectorAll('a').forEach(link => link.addEventListener('click', closeOverlay));
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeOverlay();
+  });
+
+  const sections = ['experience', 'impact', 'expertise', 'education', 'contact'];
+  const roadmapTicks = document.getElementById('roadmapTicks');
+  const roadmapFill = document.getElementById('roadmapFill');
+  const tickEls = {};
+  sections.forEach((id, index) => {
+    const section = document.getElementById(id);
+    const tick = document.createElement('div');
+    tick.className = 'tick';
+    tick.textContent = String(index + 1).padStart(2, '0');
+    roadmapTicks.appendChild(tick);
+    tickEls[id] = tick;
+    tick.style.left = `${(section.offsetTop / Math.max(1, document.body.scrollHeight - window.innerHeight)) * 100}%`;
+  });
+
+  function updateRoadmap(){
+    const total = Math.max(1, document.body.scrollHeight - window.innerHeight);
+    const scrolled = window.scrollY;
+    roadmapFill.style.width = `${Math.min(100, (scrolled / total) * 100)}%`;
+    let current = '';
+    sections.forEach(id => {
+      if (scrolled >= document.getElementById(id).offsetTop - 200) current = id;
+    });
+    sections.forEach(id => {
+      const passed = sections.indexOf(id) <= sections.indexOf(current);
+      tickEls[id].classList.toggle('active', id === current);
+      tickEls[id].classList.toggle('passed', passed);
+    });
+  }
+  window.addEventListener('scroll', updateRoadmap, { passive: true });
+  window.addEventListener('resize', updateRoadmap);
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(element => observer.observe(element));
+
+  const expLineFill = document.getElementById('expLineFill');
+  function updateExpLine(){
+    const timeline = document.querySelector('.exp-timeline');
+    const rect = timeline.getBoundingClientRect();
+    const progress = ((window.innerHeight * 0.75 - rect.top) / rect.height) * 100;
+    expLineFill.style.height = `${Math.max(0, Math.min(100, progress))}%`;
+  }
+  window.addEventListener('scroll', updateExpLine, { passive: true });
+  window.addEventListener('resize', updateExpLine);
+  updateRoadmap();
+  updateExpLine();
+</script>
+</body>
+</html>
